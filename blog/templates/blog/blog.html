@@ -1,0 +1,25 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Blog{% endblock  %}
+
+{% block content %}
+    </header>
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                {% for post in Posts %}
+                    <h4>{{post.date|date:"d-m-Y"}}<a href="/blog/{{post.id}}">{{post.title}}</a></h4>
+                    <img src="{{post.image.url}}" width="500px" height="300px" />
+                    <p>--------------------------------------</p>
+                {% endfor %}
+                <br/>
+                {% if page_obj.has_next %}
+                    <a href="{{request.path}}?page={{page_obj.next_page_number}}">Tiếp theo</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </article>
+
+{% endblock  %}

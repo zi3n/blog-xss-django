@@ -1,0 +1,35 @@
+{% extends "pages/base.html" %}
+
+{% block title %}{{post.title}}{% endblock  %}
+
+{% block content %}
+    </header>
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <h3><a href='{% url 'post' post.id %}'>{{post.title}}</a></h3>
+                    <img src="{{post.image.url}}" width="500px" height="300px" />
+                    <h6>on {{post.date}}</h6>
+                    {{post.body|safe|linebreaks}}
+                    <h3>Comments</h7>
+                    {% for comment in post.comments.all%}
+                        <h4><strong>{{comment.author}}</strong></h4>
+                        <h6><p>{{comment.date}}</p></h6>
+                        <p>{{comment.body|gitlinebreaks}}</p>
+                    {% endfor %}
+                    {% if user.username%}
+                        <form action="{% url 'post' post.id %}" method='POST'>
+                            {% csrf_token%}
+                            <p><label>Write comments:</label></p>
+                            {{form.body}}
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Comments</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </article>
+
+{% endblock  %}

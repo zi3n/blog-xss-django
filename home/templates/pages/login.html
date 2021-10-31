@@ -1,0 +1,25 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Login{% endblock %}
+{% block content %}
+    </header>
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% for key, value in form.errors.items %}
+                        {{value}}
+                    {% endfor %}
+                    <p><label style="margin-right: 10px;">Tài khoản:</label>{{form.username}}</p>
+                    <p><label style="margin-right: 10px;">Mật khẩu:</label>{{form.password}}</p>
+                    <input type="hidden" name="next" value="/"/>
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}
+
