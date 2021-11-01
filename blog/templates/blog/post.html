@@ -16,7 +16,7 @@
                     {% for comment in post.comments.all%}
                         <h4><strong>{{comment.author}}</strong></h4>
                         <h6><p>{{comment.date}}</p></h6>
-                        <p>{{comment.body|gitlinebreaks}}</p>
+                        <p>{{comment.body|linebreaks}}</p>
                     {% endfor %}
                     {% if user.username%}
                         <form action="{% url 'post' post.id %}" method='POST'>
